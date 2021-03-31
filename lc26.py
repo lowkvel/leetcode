@@ -38,5 +38,5 @@ if __name__ == '__main__':
         [0,0,1,1,1,2,2,3,3,4],]
 
     for item in nums:
-        print(s.removeDuplicates(item), item)
+        #print(s.removeDuplicates(item), item)
         print(s.removeDuplicates2(item), item)
