@@ -2,14 +2,14 @@ from typing import List
 
 class Solution:
 
-    # O(n^2)
+    # brute force, O(n^2), 44ms, 14.9mb
     def twoSum(self, nums:List[int], target:int) -> List[int]:
         for i in range(0, len(nums)-1, 1):
             for j in range(i+1, len(nums), 1):
                 if nums[j] == target - nums[i]:
                     return [i, j]
 
-    # O(n)
+    # dict, O(n), 36ms, 14.9mb
     def twoSum2(self, nums:List[int], target:int) -> List[int]:
         d = {}
         for i in range(0, len(nums), 1):
