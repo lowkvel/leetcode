@@ -13,6 +13,20 @@ class Solution:
                 i = i + 1
         return len(nums)
 
+    # dual pointers, 44ms, 14.7mb
+    def removeElement2(self, nums: List[int], val: int) -> int:
+        if len(nums) <= 0:
+            return len(nums)
+        else:
+            i, j = 0, 0
+            while j < len(nums):
+                if nums[j] != val:
+                    if j != i:
+                        nums[i], nums[j] = nums[j], nums[i]
+                    i = i + 1
+                j = j + 1
+            return i
+
 
 if __name__ == '__main__':
 
@@ -24,5 +38,5 @@ if __name__ == '__main__':
     ]
 
     for item in nums:
-        print(s.removeElement(item[0], item[1]), item[0])
+        #print(s.removeElement(item[0], item[1]), item[0])
         print(s.removeElement2(item[0], item[1]), item[0])
