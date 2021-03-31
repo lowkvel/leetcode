@@ -1,6 +1,6 @@
 class Solution:
 
-    # ?
+    # brute force, 48ms, 14.9mb
     def reverseBits(self, n:int) -> int:
         return int('{:0>32b}'.format(n)[::-1], 2)
 
