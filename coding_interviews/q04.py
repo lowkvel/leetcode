@@ -1,5 +1,6 @@
 from typing import List
 
+# same question as lc240
 """
     二维数组中的查找
 
