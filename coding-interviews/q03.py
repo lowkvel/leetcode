@@ -23,12 +23,11 @@ class Solution:
         # check for invalid input
         if nums is None:
             return "invalid input"
-
         for item in nums:
             if item > len(nums)-1 or item < 0:
                 return "invalid input"
 
-        # hash
+        # hash, using dict
         d = {}
         for item in nums:
             if item in d:
@@ -37,18 +36,35 @@ class Solution:
                 d[item] = item
         return "no repeated item"
 
-    # sort, 88ms, 23.4mb, 时间o(nlogn), 空间o(1)    
+    # set, 68ms, 23.4mb, 时间o(n), 空间o(n) 
     def findRepeatNumber2(self, nums: List[int]) -> int:
 
         # check for invalid input
         if nums is None:
             return "invalid input"
-
         for item in nums:
             if item > len(nums)-1 or item < 0:
                 return "invalid input"
 
-        # sort
+        # set, python special, similar to hash
+        s = set()
+        for index in range(0, len(nums), 1):
+            s.add(nums[index])
+            if len(s) < index + 1:
+                return nums[index]
+        return "no repeated item"
+
+    # sort, 88ms, 23.4mb, 时间o(nlogn), 空间o(1)    
+    def findRepeatNumber3(self, nums: List[int]) -> int:
+
+        # check for invalid input
+        if nums is None:
+            return "invalid input"
+        for item in nums:
+            if item > len(nums)-1 or item < 0:
+                return "invalid input"
+
+        # sort, then compare
         nums.sort()
         for index in range(0, len(nums)-1, 1):
             if nums[index] == nums[index + 1]:
@@ -56,7 +72,7 @@ class Solution:
         return "no repeated item"
 
     # Pigeonhole principle, ms, mb, 时间o(n), 空间o(1)    
-    def findRepeatNumber3(self, nums: List[int]) -> int:
+    def findRepeatNumber4(self, nums: List[int]) -> int:
         pass
 
 
@@ -80,6 +96,6 @@ if __name__ == '__main__':
     for item in nums:
         print(s.findRepeatNumber(item))
         print(s.findRepeatNumber2(item))
-        #print(s.findRepeatNumber3(item))
+        print(s.findRepeatNumber3(item))
         print('-----')
 
