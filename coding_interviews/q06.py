@@ -27,7 +27,7 @@ class LinkdedList:
 
 class Solution:
 
-    # array, 36ms, 16.2mb, time o(n), space o(n), input remains intact
+    # array (stack), 36ms, 16.2mb, time o(n), space o(n), input remains intact
     def reversePrint(self, head: ListNode) -> List[int]:
 
         # input validation
@@ -41,7 +41,21 @@ class Solution:
             head = head.next
         return temp[::-1]
 
+    # recursion, 32ms, 26.7mb, time o(n), space o(n), input remains intact
+    def reversePrint2(self, head: ListNode) -> List[int]:
+
+        def recurse(head:ListNode):
+            temp.append(head.val)
+            if head.next is not None:
+                return recurse(head.next)
         
+        # input validation
+        if head is None:
+            return []
+
+        temp = []
+        recurse(head)
+        return temp[::-1]
 
 
 if __name__ == '__main__':
@@ -61,5 +75,5 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.reversePrint(item))
-
+        print(s.reversePrint2(item))
         print('-----')
