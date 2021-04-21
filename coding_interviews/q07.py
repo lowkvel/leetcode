@@ -34,7 +34,7 @@ class TreeNode:
 
 class Solution:
 
-    # tree construction in recursion, 424ms, 88.2mb, 
+    # tree construction in recursion, 424ms, 88.2mb, time o(n^2), space o(n)
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
 
         def build(preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -100,6 +100,10 @@ class Solution:
             return build(0, len(preorder)-1, 0, len(inorder)-1)
         else:
             return "invalid input"
+
+    # tree construction in iteration, ms, mb, time o(n), space o(n)
+    def buildTree3(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        pass
         
 
 
@@ -108,12 +112,15 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
-        #[[3,9,20,15,7], [9,3,15,20,7]],
-        #[[1,2,4,7,3,5,6,8], [4,7,2,1,5,3,8,6]],
-
-        #[[3], [3]],
-        #[[None], [None]],
-        [None, None],
+        [[3,9,20,15,7], [9,3,15,20,7]],
+        [[1,2,4,7,3,5,6,8], [4,7,2,1,5,3,8,6]],
+        [[1,2,3], [3,2,1]],     # all left
+        [[1,2,3], [1,2,3]],     # all right
+                                # unmatched preorder and inorder
+        [[3], [3]],             # single element 
+        [[None], [None]],       # None element
+        [[], []],               # empty list
+        [None, None],           # None list
          
     ]
 
@@ -121,6 +128,6 @@ if __name__ == '__main__':
     for item in input:
         print(s.buildTree(item[0], item[1]))
         print(s.buildTree2(item[0], item[1]))
-
+        print(s.buildTree3(item[0], item[1]))       
         print('-----')
 
