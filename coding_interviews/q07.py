@@ -34,7 +34,7 @@ class TreeNode:
 
 class Solution:
 
-    # tree construction in recursion, 424ms,88.2mb, 
+    # tree construction in recursion, 424ms, 88.2mb, 
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
 
         def build(preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -73,6 +73,34 @@ class Solution:
         else:
             return "invalid input"
 
+    # tree construction in recursion with hash for fast retrival, 60ms, 19.7mb, time o(n), space o(n)
+    def buildTree2(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        
+        def build(pre_left, pre_right, in_left, in_right):
+            
+            if pre_left > pre_right:
+                return None
+
+            # create a new node from the left most element in preorder
+            node = TreeNode(preorder[pre_left])
+
+            # recursively construct both left and right children
+            node.left = build(pre_left + 1, pre_left + (index[preorder[pre_left]] - in_left), in_left, index[preorder[pre_left]] - 1)
+            node.right = build(pre_left + (index[preorder[pre_left]] - in_left) + 1, pre_right, index[preorder[pre_left]] + 1, in_right)
+
+            # return the tree constructed
+            return node
+
+        if preorder is not None and inorder is not None:
+            # hash the element for fast index retrival
+            index = {}
+            for i in range(0, len(inorder), 1):
+                index[inorder[i]] = i
+
+            return build(0, len(preorder)-1, 0, len(inorder)-1)
+        else:
+            return "invalid input"
+        
 
 
 if __name__ == '__main__':
@@ -80,11 +108,11 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
-        [[3,9,20,15,7], [9,3,15,20,7]],
-        [[1,2,4,7,3,5,6,8], [4,7,2,1,5,3,8,6]],
+        #[[3,9,20,15,7], [9,3,15,20,7]],
+        #[[1,2,4,7,3,5,6,8], [4,7,2,1,5,3,8,6]],
 
-        [[3], [3]],
-        [[None], [None]],
+        #[[3], [3]],
+        #[[None], [None]],
         [None, None],
          
     ]
@@ -92,6 +120,7 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.buildTree(item[0], item[1]))
+        print(s.buildTree2(item[0], item[1]))
 
         print('-----')
 
