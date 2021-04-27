@@ -34,12 +34,12 @@ from typing import List
 # obj.appendTail(value)
 # param_2 = obj.deleteHead()
 
-# two list implement, 392ms, 18.6mb, time o(n), space o(n)
+# two list implement, 380ms, 18.7mb, time o(n), space o(n)
 class CQueue:
 
     def __init__(self):                                         # two lists initiation
-        self.stack1 = []
-        self.stack2 = []
+        self.stack1 = []                                        # stack1 is used for appending
+        self.stack2 = []                                        # stack2 is used for deleting
 
     def appendTail(self, value: int) -> None:
         self.stack1.append(value)                               # append element to stack1
