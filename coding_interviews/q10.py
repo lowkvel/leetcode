@@ -29,7 +29,7 @@
 
 class Solution:
 
-    # recursion, ms, mb, time o(n), space o(n), 超出时间限制
+    # simple recursion, ms, mb, time o(n), space o(), 超出时间限制
     def fib(self, n: int) -> int:
         if n == 0:      # edge case 0: 0
             return 0
@@ -37,7 +37,7 @@ class Solution:
             return 1
         return self.fib(n - 1) + self.fib(n - 2)        # recursion
 
-    # iteration, 44ms, 14.9mb, time o(n), space o(n)
+    # dynamic programming, iteration with list of size n, 44ms, 14.9mb, time o(n), space o(n)
     def fib2(self, n: int) -> int:
         ans = []
         ans.append(0)   # edge case 0: 0
@@ -46,6 +46,16 @@ class Solution:
             ans.append(ans[index-1] + ans[index-2])
         return ans[n] % 1000000007                      # % 1000000007
 
+    # dynamic programming, iteration with list of size 2, 48ms, 14.8mb, time o(n), space o(1)
+    def fib3(self, n: int) -> int:
+        a, b = 0, 1
+        for index in range(n):
+            a, b = b, (a + b) % 1000000007              # looping a and b, 求余运算规则： 设正整数 x,y,p ，求余符号为 % ，则有 (x+y)%p=(x%p+y%p)%p
+        return a % 1000000007                           # % 1000000007
+
+    # matrix, ms, mb, time o(logn), space o()
+    def fib4(self, n: int) -> int:
+        pass
 
 if __name__ == '__main__':
 
@@ -62,4 +72,6 @@ if __name__ == '__main__':
     for item in input:
         #print(s.fib(item))
         print(s.fib2(item))
+        print(s.fib3(item))
+        print(s.fib4(item))
         print('-----')
