@@ -29,29 +29,37 @@
 
 class Solution:
 
-    # recursion, ms, mb, time o(n), space o(n)
+    # recursion, ms, mb, time o(n), space o(n), 超出时间限制
     def fib(self, n: int) -> int:
-        if n == 0:      # edge case 0
+        if n == 0:      # edge case 0: 0
             return 0
-        if n == 1:      # edge case 1
+        if n == 1:      # edge case 1: 1
             return 1
-        return self.fib(n - 1) + self.fib(n - 2)    # recursion
+        return self.fib(n - 1) + self.fib(n - 2)        # recursion
 
-
+    # iteration, 44ms, 14.9mb, time o(n), space o(n)
+    def fib2(self, n: int) -> int:
+        ans = []
+        ans.append(0)   # edge case 0: 0
+        ans.append(1)   # edge case 1: 1
+        for index in range(2, n+1, 1):                  # iteration
+            ans.append(ans[index-1] + ans[index-2])
+        return ans[n] % 1000000007                      # % 1000000007
 
 
 if __name__ == '__main__':
 
     s = Solution()
 
-
     input = [
         2,
         5,
+        37,
+        45,
     ]
 
     print('-----')
     for item in input:
-        print(s.fib(item))
-
+        #print(s.fib(item))
+        print(s.fib2(item))
         print('-----')
