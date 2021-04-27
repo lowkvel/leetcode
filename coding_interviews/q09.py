@@ -38,19 +38,19 @@ from typing import List
 class CQueue:
 
     def __init__(self):                                         # two lists initiation
-        self.stack_in = []                                      # stack1 is used for appending
-        self.stack_out = []                                     # stack2 is used for deleting
+        self.stack_in = []                                      # stack_in is used for appending
+        self.stack_out = []                                     # stack_out is used for deleting
 
     def appendTail(self, value: int) -> None:
-        self.stack_in.append(value)                             # append element to stack1
+        self.stack_in.append(value)                             # append element to stack_in
 
     def deleteHead(self) -> int:
-        if not self.stack_out:                                  # empty stack2
-            if not self.stack_in:                               # empty stack1 too, nothing left to delete, return -1
+        if not self.stack_out:                                  # empty stack_out
+            if not self.stack_in:                               # empty stack_in too, nothing left to delete, return -1
                 return -1
-            while self.stack_in:                                # move all elements from stack1 into stack2 backwards
+            while self.stack_in:                                # move all elements from stack_in into stack_out backwards
                 self.stack_out.append(self.stack_in.pop()) 
-        return self.stack_out.pop()                             # pop the last element in stack2 and return it
+        return self.stack_out.pop()                             # pop the last element in stack_out and return it
 
 
 def execution(command: List, value: List) -> List:
