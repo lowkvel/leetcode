@@ -34,24 +34,23 @@ from typing import List
 # obj.appendTail(value)
 # param_2 = obj.deleteHead()
 
-# two list implement, 380ms, 18.7mb, time o(n), space o(n)
+# dual lists implement, 380ms, 18.7mb, time o(n), space o(n)
 class CQueue:
 
     def __init__(self):                                         # two lists initiation
-        self.stack1 = []                                        # stack1 is used for appending
-        self.stack2 = []                                        # stack2 is used for deleting
+        self.stack_in = []                                      # stack1 is used for appending
+        self.stack_out = []                                     # stack2 is used for deleting
 
     def appendTail(self, value: int) -> None:
-        self.stack1.append(value)                               # append element to stack1
+        self.stack_in.append(value)                             # append element to stack1
 
     def deleteHead(self) -> int:
-        if len(self.stack2) == 0:                               # empty stack2
-            if len(self.stack1) == 0:                           # nothing to delete, return -1
+        if not self.stack_out:                                  # empty stack2
+            if not self.stack_in:                               # empty stack1 too, nothing left to delete, return -1
                 return -1
-            for index in range(len(self.stack1) -1 , -1, -1):   # move all elements from stack1 into stack2 backwards
-                self.stack2.append(self.stack1[index])
-            self.stack1 = []                                    # empty stack1
-        return self.stack2.pop()                                # pop the last element in stack2 and return it
+            while self.stack_in:                                # move all elements from stack1 into stack2 backwards
+                self.stack_out.append(self.stack_in.pop()) 
+        return self.stack_out.pop()                             # pop the last element in stack2 and return it
 
 
 def execution(command: List, value: List) -> List:
