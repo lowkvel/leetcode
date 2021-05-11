@@ -36,7 +36,6 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
 
         def dfs(i: int, j:int, p: int) -> bool:
-
             # bound, out of range, not equal, terminate this branch search
             if not 0 <= i < len(board) or not 0 <= j < len(board[0]) or board[i][j] != word[p]:
                 return False
@@ -68,6 +67,8 @@ if __name__ == '__main__':
     input = [
         [[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED"],
         [[["a","b"],["c","d"]], "abcd"],
+        [[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "SEE"],
+        [[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB"],
     ]
 
     print('-----')
