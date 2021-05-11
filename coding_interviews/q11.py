@@ -49,6 +49,24 @@ class Solution:
         low = 0
         high = len(numbers) - 1
         while low < high:
+            
+
+            # pivot calculation
+            #pivot = (low + high) // 2              # dont use this to prevent memory leak
+            """
+            high = 0100 0000 0000 0000 0000 0000 0000 0000 = 1073741824
+             low = 0100 0000 0000 0000 0000 0000 0000 0000 = 1073741824
+            
+            high + low =  1000 0000 0000 0000 0000 0000 0000 0000
+                       =  2147483648 as unsigned 32-bit integer
+                       = -2147483648 as signed   32-bit integer
+	
+            (high + low) / 2       = 1100 0000 0000 0000 0000 0000 0000 0000 = -1073741824
+	        (high + low) >>> 1     = 0100 0000 0000 0000 0000 0000 0000 0000 =  1073741824
+            low + (high - low) / 2 = 0100 0000 0000 0000 0000 0000 0000 0000 =  1073741824
+            """
+            
+            # pivot calculation
             pivot = low + (high - low) // 2
 
             if numbers[pivot] < numbers[high]:      # numbers[pivot] < numbers[high]
