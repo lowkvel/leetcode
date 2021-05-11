@@ -39,6 +39,26 @@ class Solution:
                 return numbers[index + 1]
         return numbers[0]
 
+    # binary search, 44ms, 15.1mb, time o(nlogn) - o(n), space o(1)
+    def minArray2(self, numbers: List[int]) -> int:
+
+        # edge case, empty list or list with no element
+        if numbers is None or len(numbers) == 0:
+            return None
+
+        low = 0
+        high = len(numbers) - 1
+        while low < high:
+            pivot = low + (high - low) // 2
+
+            if numbers[pivot] < numbers[high]:      # numbers[pivot] < numbers[high]
+                high = pivot
+            elif numbers[pivot] > numbers[high]:    # numbers[pivot] > numbers[high]
+                low = pivot + 1
+            elif numbers[pivot] == numbers[high]:   # numbers[pivot] == numbers[high]
+                high = high - 1
+
+        return numbers[low]
 
 
 
@@ -48,15 +68,16 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
-        [3,4,5,1,2],
-        [2,2,2,0,1],
+        #[3,4,5,1,2],
+        #[2,2,2,0,1],
 
-
+        [3,1,3],
     ]
 
     print('-----')
     for item in input:
         print(s.minArray(item))
+        print(s.minArray2(item))
 
         print('-----')
 
