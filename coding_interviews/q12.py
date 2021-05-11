@@ -56,8 +56,11 @@ class Solution:
             result = dfs(i - 1, j, p) or dfs(i + 1, j, p) or dfs(i, j - 1, p) or dfs(i, j + 1, p)    # dfs for (up, down, left, right)
             p = p - 1               # decrement the pointer
             board[i][j] = word[p]   # restore unvisited in orginal board
-            
+
             return result
+
+        if board is None or board[0] is None or len(board) == 0 or word == '' or word is None:
+            return False
 
         for i in range(0, len(board), 1):
             for j in range(0, len(board[i]), 1):
@@ -65,8 +68,7 @@ class Solution:
                     return True
         return False
         
-        
-                    
+             
 if __name__ == '__main__':
 
     s = Solution()
@@ -76,6 +78,13 @@ if __name__ == '__main__':
         [[["a","b"],["c","d"]], "abcd"],
         [[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "SEE"],
         [[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB"],
+        [[["A","B","C","E"]], "BC"],
+        [[["A"],["B"],["C"],["E"]], "BC"],
+        [[[None]], "BC"],
+        [[None], "BC"],
+        [None, "BC"], 
+        [[["A"]], ""],
+        [[["A"]], None],
     ]
 
     print('-----')
