@@ -51,8 +51,27 @@ class Solution:
                 q.put((x, y + 1))   # down
         return len(s)
 
-    # iteration, 52ms, 15mb, time o(mn), space o(mn)
+    # dfs, 56ms, 15.5mb, time o(mn), space o(mn)
     def movingCount2(self, m: int, n: int, k: int) -> int:
+        def digitSum(number: int) -> int:
+            sum = 0
+            while number > 0:
+                sum = sum + number % 10
+                number = number // 10
+            return sum
+
+        def dfs(i: int, j: int):
+            # the the pair is out of range, not valid, already visited, cannot vist this pair and return 0
+            if i >= m or j >= n or (digitSum(i) + digitSum(j) > k) or (i, j) in s:
+                return 0
+            s.add((i, j))
+            return 1 + dfs(i + 1, j) + dfs(i, j + 1)    # 1 + right + down
+
+        s = set()
+        return dfs(0, 0)
+
+    # iteration, ms, mb, time o(mn), space o(mn)
+    def movingCount3(self, m: int, n: int, k: int) -> int:
         def digitSum(number: int) -> int:
             sum = 0
             while number > 0:
@@ -86,5 +105,5 @@ if __name__ == '__main__':
     for item in input:
         print(s.movingCount(item[0], item[1], item[2]))
         print(s.movingCount2(item[0], item[1], item[2]))
-
+        print(s.movingCount3(item[0], item[1], item[2]))
         print('-----')
