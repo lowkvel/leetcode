@@ -37,6 +37,9 @@ class Solution:
                 number = number // 10
             return sum
 
+        if k < 0 or m < 1 or n < 1:
+            return 0
+
         q = Queue()     # used for bfs
         s = set()       # used for counting, set feature: elements are all unique
         
@@ -67,6 +70,9 @@ class Solution:
             s.add((i, j))
             return 1 + dfs(i + 1, j) + dfs(i, j + 1)    # 1 + right + down
 
+        if k < 0 or m < 1 or n < 1:
+            return 0
+
         s = set()
         return dfs(0, 0)
 
@@ -78,6 +84,9 @@ class Solution:
                 sum = sum + number % 10
                 number = number // 10
             return sum
+
+        if k < 0 or m < 1 or n < 1:
+            return 0
 
         s = set()
         s.add((0, 0))
@@ -98,6 +107,12 @@ if __name__ == '__main__':
     input = [
         [2,3,1],
         [3,1,0],
+
+        [2,1,1],
+        [1,2,1],
+        [2,3,-1],
+        [0,0,0],
+        [0,0,-1]
 
     ]
 
