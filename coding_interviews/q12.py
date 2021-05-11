@@ -33,8 +33,15 @@ from typing import List
 class Solution:
 
     # dfs, 200ms, 18.2mb, time o(mn*(4-1)^len(word)), space o(mn)
+    """
+        dfs process:
+            check for bound limits, out of area or not equal in this problem
+            check for solution required, all characters in word found in this problem
+            mark visited in board, etc for current node
+            dfs for all possible route in next batch
+            unmark visited in board, etc using word for current node
+    """
     def exist(self, board: List[List[str]], word: str) -> bool:
-
         def dfs(i: int, j:int, p: int) -> bool:
             # bound, out of range, not equal, terminate this branch search
             if not 0 <= i < len(board) or not 0 <= j < len(board[0]) or board[i][j] != word[p]:
@@ -44,12 +51,12 @@ class Solution:
             if p == len(word) - 1:
                 return True
 
-            # mark visited
-            board[i][j] = '-'
-            # dfs for up, down, left, right
-            result = dfs(i - 1, j, p + 1) or dfs(i + 1, j, p + 1) or dfs(i, j - 1, p + 1) or dfs(i, j + 1, p + 1)
-            # restore unvisited
-            board[i][j] = word[p]
+            board[i][j] = '-'       # mark visited in original board since it wont get passed into recursion
+            p = p + 1               # increment the pointer
+            result = dfs(i - 1, j, p) or dfs(i + 1, j, p) or dfs(i, j - 1, p) or dfs(i, j + 1, p)    # dfs for (up, down, left, right)
+            p = p - 1               # decrement the pointer
+            board[i][j] = word[p]   # restore unvisited in orginal board
+            
             return result
 
         for i in range(0, len(board), 1):
