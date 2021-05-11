@@ -21,3 +21,10 @@ print(in_left)
 print(in_right)
 print(pre_left)
 print(pre_right)
+
+sum = 0
+number = 12345
+while number > 0:
+    sum = sum + number % 10
+    number = number // 10
+print(sum)

@@ -1,4 +1,5 @@
 from typing import List
+from queue import Queue
 
 """
     机器人的运动范围
@@ -26,8 +27,48 @@ from typing import List
 """
 
 class Solution:
+
+    # bfs, 136ms, 15.3mb, time o(mn), space o(mn)
     def movingCount(self, m: int, n: int, k: int) -> int:
-        pass
+        def digitSum(number: int) -> int:
+            sum = 0
+            while number > 0:
+                sum = sum + number % 10
+                number = number // 10
+            return sum
+
+        q = Queue()     # used for bfs
+        s = set()       # used for counting, set feature: elements are all unique
+        
+        q.put((0, 0))
+        while not q.empty() == True:
+            # get first element pair from queue
+            x, y = q.get()
+            # if the pair from queue not in set (not visited), and the index is valid for both x and y, and the digit sum <= k
+            if (x, y) not in s and 0 <= x < m and 0 <= y < n and (digitSum(x) + digitSum(y) <= k):
+                s.add((x, y))
+                q.put((x + 1, y))   # right
+                q.put((x, y + 1))   # down
+        return len(s)
+
+    # iteration, 52ms, 15mb, time o(mn), space o(mn)
+    def movingCount2(self, m: int, n: int, k: int) -> int:
+        def digitSum(number: int) -> int:
+            sum = 0
+            while number > 0:
+                sum = sum + number % 10
+                number = number // 10
+            return sum
+
+        s = set()
+        s.add((0, 0))
+        for i in range(0, m, 1):
+            for j in range(0, n, 1):
+                # if any of two predecessors (from left or above) is in the set (which should be checked before and valid)
+                # and current (i, j) is valid, add it to the set
+                if ((i - 1, j) in s or (i, j - 1) in s) and (digitSum(i) + digitSum(j) <= k):
+                    s.add((i, j))
+        return len(s)
 
 
 
@@ -44,5 +85,6 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.movingCount(item[0], item[1], item[2]))
+        print(s.movingCount2(item[0], item[1], item[2]))
 
         print('-----')
