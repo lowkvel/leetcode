@@ -21,3 +21,42 @@ from typing import List
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
 
+class Solution:
+
+    # simple, 36ms, 15.1mb, time o(n), space o(1)
+    def minArray(self, numbers: List[int]) -> int:
+
+        # edge case, empty list or list with no element
+        if numbers is None or len(numbers) == 0:
+            return None
+
+        # edge case, list with only one element
+        if len(numbers) == 1:
+            return numbers[0]
+
+        for index in range(0, len(numbers) - 1, 1):
+            if numbers[index] > numbers[index + 1]:
+                return numbers[index + 1]
+        return numbers[0]
+
+
+
+
+
+if __name__ == '__main__':
+
+    s = Solution()
+
+    input = [
+        [3,4,5,1,2],
+        [2,2,2,0,1],
+
+
+    ]
+
+    print('-----')
+    for item in input:
+        print(s.minArray(item))
+
+        print('-----')
+
