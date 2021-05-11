@@ -31,14 +31,36 @@ from typing import List
 """
 
 class Solution:
+
+    # dfs, 200ms, 18.2mb, time o(mn*(4-1)^len(word)), space o(mn)
     def exist(self, board: List[List[str]], word: str) -> bool:
-        pass
 
+        def dfs(i: int, j:int, p: int) -> bool:
 
+            # bound, out of range, not equal, terminate this branch search
+            if not 0 <= i < len(board) or not 0 <= j < len(board[0]) or board[i][j] != word[p]:
+                return False
 
+            # solution found
+            if p == len(word) - 1:
+                return True
 
+            # mark visited
+            board[i][j] = '-'
+            # dfs for up, down, left, right
+            result = dfs(i - 1, j, p + 1) or dfs(i + 1, j, p + 1) or dfs(i, j - 1, p + 1) or dfs(i, j + 1, p + 1)
+            # restore unvisited
+            board[i][j] = word[p]
+            return result
 
-
+        for i in range(0, len(board), 1):
+            for j in range(0, len(board[i]), 1):
+                if dfs(i, j, 0) == True:
+                    return True
+        return False
+        
+        
+                    
 if __name__ == '__main__':
 
     s = Solution()
@@ -50,7 +72,7 @@ if __name__ == '__main__':
 
     print('-----')
     for item in input:
-        print(s.exist())
+        print(s.exist(item[0], item[1]))
 
         print('-----')
 
