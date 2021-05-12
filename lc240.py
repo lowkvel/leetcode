@@ -1,2 +1,2 @@
-from .coding_interviews import q04
+from .coding_interviews.chapter_2 import q04
 

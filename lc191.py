@@ -1,1 +1,1 @@
-from .coding_interviews import q15
+from .coding_interviews.chapter_2 import q15
