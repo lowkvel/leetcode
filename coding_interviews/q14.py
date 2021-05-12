@@ -26,8 +26,32 @@
 """
 
 class Solution:
+
+    # dynamic programming
     def cuttingRope(self, n: int) -> int:
-        pass
+        
+        if n <= 1:      # 0, 1:     0 * (0, 1) = 0
+            return 0
+        if n == 2:      # 2:        1 * 1 = 1
+            return 1
+        if n == 3:      # 3:        1 * 2 = 2
+            return 2
+
+        d = {}
+        d[0] = 0    # length of 0: 0
+        d[1] = 1    # length of 1: 1
+        d[2] = 2    # length of 2: 2
+        d[3] = 3    # length of 3: 3
+
+        for i in range(4, n + 1, 1):
+            max = 0
+            for j in range(1, i // 2 + 1, 1):
+                products = d[j] * d[i - j]
+                if products > max:
+                    max = products
+            d[i] = max
+        
+        return d[n]
 
 
 
@@ -37,7 +61,8 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
-
+        #2,
+        10,
     ]
 
     print('-----')
