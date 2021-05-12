@@ -26,6 +26,14 @@
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+    similar questions:
+    1.  decide if a int n is power of 2.
+        1>  if n is power of 2, then its binary representation will only contain the left-most 1, while (n-1) will have the left-most 0 and all other bits to be 1s
+        2>  so if n & (n-1) == 0 then it is power of two
+    2.  given two int m and n, decide how many steps are needed in order to turn m into n under binary representation.
+        1>  calculate m xor n
+        2>  count how many 1s exist in (m xor n) using n & (n-1) method
 """
 
 class Solution:
