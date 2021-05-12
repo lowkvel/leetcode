@@ -22,14 +22,55 @@
     提示：
         2 <= n <= 1000
 
-        来源：力扣（LeetCode）
-        链接：https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof
-        著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
 
 class Solution:
+
+    # 求 (x^a) % p —— 循环求余法
+    def remainder(x, a, p):
+        rem = 1
+        for _ in range(a):
+            rem = (rem * x) % p
+        return rem
+
+    # 求 (x^a) % p —— 快速幂求余
+    def remainder(x, a, p):
+        rem = 1
+        while a > 0:
+            if a % 2: rem = (rem * x) % p
+            x = x ** 2 % p
+            a //= 2
+        return rem
+
+    """
+        作者：jyd
+        链接：https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/solution/mian-shi-ti-14-ii-jian-sheng-zi-iitan-xin-er-fen-f/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    """
+
+    # greedy algorithm, 48ms, 14.9mb, time o(log a), space o(1)
     def cuttingRope(self, n: int) -> int:
-        pass
+        # has to cut under these senarios
+        if n <= 1:      # 0, 1:     0 * (0, 1) = 0
+            return 0
+        elif n == 2:    # 2:        1 * 1 = 1
+            return 1
+        elif n == 3:    # 3:        1 * 2 = 2
+            return 2
+        
+        a, b, p = n // 3, n % 3, 1000000007
+
+        if b == 0: 
+            return 3 ** a % p
+        elif b == 1: 
+            return 3 ** (a - 1) * 4 % p
+        else:
+            return 3 ** a * 2 % p
+
 
 
 
