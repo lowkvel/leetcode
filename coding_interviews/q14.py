@@ -53,7 +53,14 @@ class Solution:
         
         return d[n]
 
-    # greedy algorithm, 36ms, 14.7mb, time o(1), space o(1)
+    # greedy algorithm, 36ms, 14.7mb, time o(1, log a), space o(1)
+    """
+            when n >= 5, we need to cut it to length of 3 or 2
+                2(n - 2) > n --> 2n - 4 > n --> n > 4   --> n >= 5
+                3(n - 3) > n --> 3n - 9 > n --> n > 4.5 --> n >= 5
+            when n >= 3, we need more length of 3 instead of 2
+                3(n - 3) >= 2(n - 2) --> 3n - 9 >= 2n - 4 --> n >= 5
+        """
     def cuttingRope2(self, n: int) -> int:
         if n <= 1:      # 0, 1:     0 * (0, 1) = 0
             return 0
@@ -62,21 +69,26 @@ class Solution:
         elif n == 3:    # 3:        1 * 2 = 2
             return 2
 
-        if n % 3 == 1:
-            return pow(3, n // 3 - 1) * 4   # 3^(n // 3 - 1) * 2^2
-        elif n % 3 == 2:
-            return pow(3, n // 3) * 2       # 3^(n // 3) * 2^1
-        else:
-            return pow(3, n // 3)           # 3^(n // 3)
+        a, b = n // 3, n % 3
 
+        # time o(log a)
         """
-            when n >= 5, we need to cut it to length of 3 or 2
-                2(n - 2) > n --> 2n - 4 > n --> n > 4   --> n >= 5
-                3(n - 3) > n --> 3n - 9 > n --> n > 4.5 --> n >= 5
-            when n >= 3, we need more length of 3 instead of 2
-                3(n - 3) >= 2(n - 2) --> 3n - 9 >= 2n - 4 --> n >= 5
-        """
+        if b == 1:                          # 3^(n // 3 - 1) * 2^2
+            return pow(3, a - 1) * 4   
+        elif b == 2:                        # 3^(n // 3) * 2^1
+            return pow(3, a) * 2       
+        else:                               # 3^(n // 3)
+            return pow(3, a)   
+        """        
 
+        # time o(1)
+        import math
+        if b == 1:                              # 3^(n // 3 - 1) * 2^2
+            return int(math.pow(3, a - 1) * 4)
+        elif b == 2:                            # 3^(n // 3) * 2^1
+            return int(math.pow(3, a) * 2)   
+        else:                                   # 3^(n // 3)
+            return int(math.pow(3, a))      
 
 
 if __name__ == '__main__':
