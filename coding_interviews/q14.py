@@ -27,14 +27,14 @@
 
 class Solution:
 
-    # dynamic programming
+    # dynamic programming, 36ms, 14.9mb, time o(n^2), space o(n)
     def cuttingRope(self, n: int) -> int:
         
         if n <= 1:      # 0, 1:     0 * (0, 1) = 0
             return 0
-        if n == 2:      # 2:        1 * 1 = 1
+        elif n == 2:    # 2:        1 * 1 = 1
             return 1
-        if n == 3:      # 3:        1 * 2 = 2
+        elif n == 3:    # 3:        1 * 2 = 2
             return 2
 
         d = {}
@@ -43,16 +43,39 @@ class Solution:
         d[2] = 2    # length of 2: 2
         d[3] = 3    # length of 3: 3
 
-        for i in range(4, n + 1, 1):
+        for i in range(4, n + 1, 1):            # starting from 4
             max = 0
-            for j in range(1, i // 2 + 1, 1):
+            for j in range(1, i // 2 + 1, 1):   # calculate the first half
                 products = d[j] * d[i - j]
-                if products > max:
+                if products > max:              # get the max product
                     max = products
-            d[i] = max
+            d[i] = max                          # add it to the dict
         
         return d[n]
 
+    # greedy algorithm, 36ms, 14.7mb, time o(1), space o(1)
+    def cuttingRope2(self, n: int) -> int:
+        if n <= 1:      # 0, 1:     0 * (0, 1) = 0
+            return 0
+        elif n == 2:    # 2:        1 * 1 = 1
+            return 1
+        elif n == 3:    # 3:        1 * 2 = 2
+            return 2
+
+        if n % 3 == 1:
+            return pow(3, n // 3 - 1) * 4   # 3^(n // 3 - 1) * 2^2
+        elif n % 3 == 2:
+            return pow(3, n // 3) * 2       # 3^(n // 3) * 2^1
+        else:
+            return pow(3, n // 3)           # 3^(n // 3)
+
+        """
+            when n >= 5, we need to cut it to length of 3 or 2
+                2(n - 2) > n --> 2n - 4 > n --> n > 4   --> n >= 5
+                3(n - 3) > n --> 3n - 9 > n --> n > 4.5 --> n >= 5
+            when n >= 3, we need more length of 3 instead of 2
+                3(n - 3) >= 2(n - 2) --> 3n - 9 >= 2n - 4 --> n >= 5
+        """
 
 
 
@@ -61,12 +84,16 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
-        #2,
+        2,
         10,
+
+        0,
+        -1,
     ]
 
     print('-----')
     for item in input:
         print(s.cuttingRope(item))
+        print(s.cuttingRope2(item))
 
         print('-----')
