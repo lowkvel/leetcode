@@ -29,9 +29,15 @@
 """
 
 class Solution:
-    def hammingWeight(self, n: int) -> int:
 
-        pass
+    # right shift bit-wise, 44ms, 18.4mb, time o(log2), space o(1)
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        while n != 0:
+            if n & 1:               # right most bit is 1
+                count = count + 1
+            n = n >> 1              # right shift 1 bit 
+        return count
 
 
 
@@ -40,6 +46,9 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
+        0b00000000000000000000000000001011,
+        0b00000000000000000000000010000000,
+        0b11111111111111111111111111111101,
 
     ]
 
