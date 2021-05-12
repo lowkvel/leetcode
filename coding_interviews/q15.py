@@ -30,15 +30,27 @@
 
 class Solution:
 
-    # right shift bit-wise, 44ms, 18.4mb, time o(log2), space o(1)
+    # right shift bit-wise, 44ms, 18.4mb, time o(log2 n), space o(1)
     def hammingWeight(self, n: int) -> int:
         count = 0
         while n != 0:
-            if n & 1:               # right most bit is 1
+            if n & 1 == 1:          # right most bit is 1
                 count = count + 1
             n = n >> 1              # right shift 1 bit 
         return count
 
+    # n&(n-1), 48ms, 14.8mb, time o(n), space o(1)
+    """
+        let n = 1100, then n-1 = 1011, the right-most 1 changed to 0 and all 0s after it changed to 1s
+        n & (n-1) = 1100 & 1011 = 1000, the right-most 1 changed to 0 compared to n it self
+        so we only need to do n & (n-1) multiple times until all 1s changed to 0s
+    """
+    def hammingWeight2(self, n: int) -> int:
+        count = 0
+        while n != 0:
+            count = count + 1
+            n = n & (n - 1)
+        return count
 
 
 if __name__ == '__main__':
@@ -55,5 +67,5 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.hammingWeight(item))
-
+        print(s.hammingWeight2(item))
         print('-----')
