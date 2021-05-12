@@ -30,6 +30,7 @@ class Solution:
     # dynamic programming, 36ms, 14.9mb, time o(n^2), space o(n)
     def cuttingRope(self, n: int) -> int:
         
+        # has to cut under these senarios
         if n <= 1:      # 0, 1:     0 * (0, 1) = 0
             return 0
         elif n == 2:    # 2:        1 * 1 = 1
@@ -37,6 +38,7 @@ class Solution:
         elif n == 3:    # 3:        1 * 2 = 2
             return 2
 
+        # does not need to cut, since it will appear as an element in future use
         d = {}
         d[0] = 0    # length of 0: 0
         d[1] = 1    # length of 1: 1
@@ -62,6 +64,8 @@ class Solution:
                 3(n - 3) >= 2(n - 2) --> 3n - 9 >= 2n - 4 --> n >= 5
         """
     def cuttingRope2(self, n: int) -> int:
+
+        # has to cut under these senarios
         if n <= 1:      # 0, 1:     0 * (0, 1) = 0
             return 0
         elif n == 2:    # 2:        1 * 1 = 1
@@ -69,6 +73,7 @@ class Solution:
         elif n == 3:    # 3:        1 * 2 = 2
             return 2
 
+        # does not need to cut, since it will appear as an element in future use
         a, b = n // 3, n % 3
 
         # time o(log a)
