@@ -30,7 +30,7 @@
 
 class Solution:
 
-    # simple solution, ms, mb, time o(n), space o(1)    # out of time
+    # simple solution, ms, mb, time o(n), space o(1)    # time limits exceeded
     def myPow(self, x: float, n: int) -> float:
         if n == 0:      # power of 0 gives 1
             return 1
@@ -47,6 +47,47 @@ class Solution:
 
         return result
 
+    # divide and conquer, 48ms, 14.9mb, time o(log2 n), space o(1)
+    def myPow2(self, x: float, n: int) -> float:
+
+        def recursion(x: float, n:int) -> float:
+            if n == 0:      # edge case, x^0 = 1
+                return 1    
+            
+            if n == 1:      # edge case, x^1 = x
+                return x
+
+            """
+            # normal operation
+            result = recursion(x, n // 2)
+            result = result * result
+            if n % 2 == 1:
+                result = result * x
+            """
+
+            # bit operation
+            result = recursion(x, n >> 1)   # n // 2 === n >> 1
+            result = result * result
+            if n & 0b1:                     # n % 2 === n & 0b1
+                result = result * x
+
+            return result
+
+        if n == 0:      # power of 0 gives 1
+            return 1
+
+        if x == 0:      # base of 0 gives 0
+            return 0
+
+        result = recursion(x, abs(n))
+
+        if n < 0:
+            result = 1 / result
+
+        return result
+
+
+        
     
 
 
@@ -63,7 +104,7 @@ if __name__ == '__main__':
         [-2.0, 3],
         [-2.0, -2],
         [-2.0, -3],
-        
+
         [0, 0],
         [0, 1],
         [0, -1],
@@ -75,5 +116,5 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.myPow(item[0], item[1]))
-
+        print(s.myPow2(item[0], item[1]))
         print('-----')
