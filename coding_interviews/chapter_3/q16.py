@@ -20,8 +20,8 @@
  
     提示：
         -100.0 < x < 100.0
-        -231 <= n <= 231-1
-        -104 <= xn <= 104
+        -2^31 <= n <= 2^(31-1)
+        -10^4 <= xn <= 10^4
 
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof
@@ -29,11 +29,25 @@
 """
 
 class Solution:
+
+    # simple solution, ms, mb, time o(n), space o(1)    # out of time
     def myPow(self, x: float, n: int) -> float:
+        if n == 0:      # power of 0 gives 1
+            return 1
 
-        pass
+        if x == 0:      # base of 0 gives 0
+            return 0
 
+        result = 1
+        for index in range(0, abs(n), 1):
+            result = result * x    
 
+        if n < 0:       # negative power gives 1/x
+            result = 1 / result
+
+        return result
+
+    
 
 
 if __name__ == '__main__':
@@ -41,11 +55,25 @@ if __name__ == '__main__':
     s = Solution()
 
     input = [
+        #[2.0, 10],
+        [2.1, 3],
+        [2.0, -2],
+
+        [-2.0, 2],
+        [-2.0, 3],
+        [-2.0, -2],
+        [-2.0, -3],
+        
+        [0, 0],
+        [0, 1],
+        [0, -1],
+        [1, 0],
+        [-1, 0],
 
     ]
 
     print('-----')
     for item in input:
-        print(s.myPow(item))
+        print(s.myPow(item[0], item[1]))
 
         print('-----')
