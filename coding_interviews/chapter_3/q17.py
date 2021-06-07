@@ -45,8 +45,51 @@ class Solution:
 
         return list(range(1, 10 ** n))
 
+    # sequential string addition simulation, 484ms, 20.2mb, time o(n), space o(1)
+    def printNumbers3(self, n: int) -> List[int]:
 
+        # deal with invalid input
+        if not isinstance(n, int) or n <= 0:
+            return None
 
+        current_number = '0'
+        current_n = len(current_number)
+        result = []
+        while current_n < n + 1:
+
+            # addtion happens here
+            carry_bit = 0
+            for index in range(len(current_number) - 1, -1, -1):
+
+                # addition happens differently according to 1 or carry_bit
+                if index == len(current_number) - 1:
+                    sum = int(current_number[index:index + 1]) + 1
+                else:
+                    sum = int(current_number[index:index + 1]) + carry_bit
+                    carry_bit = 0
+
+                # deal with carry_bit
+                if sum >= 10:
+                    carry_bit = 1
+                    sum = sum - 10
+                current_number = current_number[0:index] + str(sum) + current_number[index + 1: len(current_number)]
+
+                # number length increases
+                if carry_bit == 1:
+                    if index == 0:
+                        current_number = '1' + current_number
+
+            # increment the length
+            if len(current_number) > current_n:
+                current_n = current_n + 1
+
+            # max number length exceeded
+            if current_n > n:
+                break
+
+            result.append(int(current_number))
+
+        return result
 
 
 if __name__ == '__main__':
@@ -57,13 +100,11 @@ if __name__ == '__main__':
         1,
         2,
 
-        's',
         0,
         -1,
         0.1,
         1.1, 
-
-
+        's',
     ]
 
     print('-----')
