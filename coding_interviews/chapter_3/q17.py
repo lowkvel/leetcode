@@ -1,4 +1,4 @@
-
+from typing import List
 
 """
     打印从1到最大的n位数
@@ -20,10 +20,21 @@
 
 class Solution:
 
-    # simple solution, ms, mb, time o(), space o()
+    # simple solution, 56ms, 20.3mb, time o(10^n), space o(1)
     def printNumbers(self, n: int) -> List[int]:
-        pass
+        
+        # calculate the min (n+1)-digit number, 3 -> 1000
+        import math
+        min_np1 = int(math.pow(10, n))
 
+        result = []
+        for index in range (1, min_np1, 1):
+            result.append(index)
+        return result
+
+    # python special, 40ms, 20.3mb, time o(10^n), space o(1)
+    def printNumbers2(self, n: int) -> List[int]:
+        return list(range(1, 10 ** n))
 
 
 
@@ -39,5 +50,6 @@ if __name__ == '__main__':
     print('-----')
     for item in input:
         print(s.printNumbers(item))
+        print(s.printNumbers2(item))
 
         print('-----')
