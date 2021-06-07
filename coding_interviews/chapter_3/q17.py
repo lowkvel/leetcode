@@ -22,6 +22,10 @@ class Solution:
 
     # simple solution, 56ms, 20.3mb, time o(10^n), space o(1)
     def printNumbers(self, n: int) -> List[int]:
+
+        # deal with invalid input
+        if not isinstance(n, int) or n <= 0:
+            return None
         
         # calculate the min (n+1)-digit number, 3 -> 1000
         import math
@@ -34,7 +38,14 @@ class Solution:
 
     # python special, 40ms, 20.3mb, time o(10^n), space o(1)
     def printNumbers2(self, n: int) -> List[int]:
+
+        # deal with invalid input
+        if not isinstance(n, int) or n <= 0:
+            return None
+
         return list(range(1, 10 ** n))
+
+
 
 
 
@@ -44,6 +55,14 @@ if __name__ == '__main__':
 
     input = [
         1,
+        2,
+
+        's',
+        0,
+        -1,
+        0.1,
+        1.1, 
+
 
     ]
 
@@ -51,5 +70,7 @@ if __name__ == '__main__':
     for item in input:
         print(s.printNumbers(item))
         print(s.printNumbers2(item))
+        print(s.printNumbers3(item))
+        print(s.printNumbers4(item))
 
         print('-----')
