@@ -45,7 +45,7 @@ class Solution:
 
         return list(range(1, 10 ** n))
 
-    # sequential string addition simulation, 484ms, 20.2mb, time o(n), space o(1)
+    # sequential string addition simulation, 484ms, 20.2mb, time o(nm), space o(1)
     def printNumbers3(self, n: int) -> List[int]:
 
         # deal with invalid input
@@ -90,6 +90,16 @@ class Solution:
             result.append(int(current_number))
 
         return result
+
+    # recursive string combination, ms, mb, time o(), space ()
+    def printNumbers4(self, n: int) -> List[int]:
+
+        # deal with invalid input
+        if not isinstance(n, int) or n <= 0:
+            return None
+        
+        pass
+
 
 
 if __name__ == '__main__':
