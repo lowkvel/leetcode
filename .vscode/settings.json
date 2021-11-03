@@ -39,6 +39,8 @@
         "filesystem": "cpp",
         "initializer_list": "cpp",
         "string_view": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "stack": "cpp",
+        "chrono": "cpp"
     }, 
 }
