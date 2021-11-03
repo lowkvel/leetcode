@@ -7,7 +7,7 @@
 !*/
 
 # Ignore .vscode dirs #
-#.vscode
+.vscode
 
 # Compiled source #
 *.com
