@@ -41,6 +41,7 @@
         "string_view": "cpp",
         "numeric": "cpp",
         "stack": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "__nullptr": "cpp"
     }, 
 }
