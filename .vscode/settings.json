@@ -42,6 +42,7 @@
         "numeric": "cpp",
         "stack": "cpp",
         "chrono": "cpp",
-        "__nullptr": "cpp"
+        "__nullptr": "cpp",
+        "queue": "cpp"
     }, 
 }
