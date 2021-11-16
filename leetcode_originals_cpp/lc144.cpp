@@ -57,6 +57,7 @@
 
 # include <iostream>
 # include <vector>
+# include <stack>
 
 using namespace std;
 
@@ -84,6 +85,28 @@ public:
         ans.push_back(node->val);       // root
         preorder(node->left, ans);      // left
         preorder(node->right, ans);     // right
+    }
+    
+    // iteration with stack 
+    vector<int> preorderTraversal2(TreeNode* root) {
+        vector<int> ans;
+        if (root == nullptr)
+            return ans;
+
+        stack<TreeNode *> stk;
+        TreeNode *node = root;
+        while (!stk.empty() || node != nullptr) {
+            while (node != nullptr) {
+                ans.push_back(node->val);   // add root's val to answer     <- here
+                stk.push(node);             // push added root into stack
+                node = node->left;          // move to added root's left
+            }
+            node = stk.top();               // go back to added root
+            stk.pop();                      // pop added root from stack
+            node = node->right;             // move to added root's right
+        }
+
+        return ans;
     }
 };
 

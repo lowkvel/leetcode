@@ -34,6 +34,7 @@
 
 # include <iostream>
 # include <vector>
+# include <stack>
 
 using namespace std;
 
@@ -61,6 +62,38 @@ public:
         postorder(node->left, ans);     // left
         postorder(node->right, ans);    // right
         ans.push_back(node->val);       // root
+    }
+
+    // iteration
+    vector<int> postorderTraversal2(TreeNode* root) {
+        vector<int> ans;
+        if (root == nullptr)
+            return ans;
+
+        stack<TreeNode *> stk;
+        TreeNode *node = root;
+        TreeNode *prev = nullptr;
+        while (!stk.empty() || node != nullptr) {
+            while (node != nullptr) {
+                stk.push(node);             // push root into stack for later access
+                node = node->left;          // move to root's left
+            }
+
+            node = stk.top();               // go back to added root
+            stk.pop();                      // pop added root from stack
+
+            if (node->right == nullptr      // no right subtree, left traversd, no right subtree, now root
+                || node->right == prev) {   // right subtree is traversed if node->right == prev, left & right all traversed, now root
+                ans.push_back(node->val);   // add root's val into answer       <- here
+                prev = node;                // move one level up from right
+                node = nullptr;             // prevent repeated left subtree visiting (wont go into while loop above)
+            } else {
+                stk.push(node);             // push root into stack for later access
+                node = node->right;         // move to root's right
+            }
+        }
+
+        return ans;
     }
 };
 

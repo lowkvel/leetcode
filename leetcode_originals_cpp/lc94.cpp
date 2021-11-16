@@ -60,6 +60,7 @@
 
 # include <iostream>
 # include <vector>
+# include <stack>
 
 using namespace std;
 
@@ -87,6 +88,28 @@ public:
         inorder(node->left, ans);       // left
         ans.push_back(node->val);       // root
         inorder(node->right, ans);      // right
+    }
+
+    // iteration with stack
+    vector<int> inorderTraversal2(TreeNode* root) {
+        vector<int> ans;
+        if (root == nullptr)
+            return ans;
+
+        stack<TreeNode *> stk;
+        TreeNode *node = root;
+        while (!stk.empty() || node != nullptr) {
+            while (node != nullptr) {
+                stk.push(node);             // push root into stack for later access
+                node = node->left;          // move to added root's left
+            }
+            node = stk.top();               // go back to added root
+            stk.pop();                      // pop added root from stack
+            ans.push_back(node->val);       // add root's val into answer   <- here
+            node = node->right;             // move to added root's right
+        }
+
+        return ans;
     }
 };
 
