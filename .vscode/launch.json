@@ -12,7 +12,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "clang++ - Build and debug active file",
+            "name": "intel64 clang++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -22,6 +22,15 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang++ build active file"
+        },
+        {
+            "name": "arm64 clang++ - Build and debug active file",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
             "preLaunchTask": "C/C++: clang++ build active file"
         }
     ]

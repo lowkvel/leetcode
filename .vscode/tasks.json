@@ -8,10 +8,10 @@
 			"args": [
 				"-std=c++11",
 				"-g",
-				"${file}",					// build a single file
-				//"${fileDirname}/**.cpp",	// build all files
+				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}", 
+				"-fdiagnostics-color=always",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -24,6 +24,6 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /usr/bin/clang++"
-		}
+		},
 	]
 }
