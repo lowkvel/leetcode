@@ -74,6 +74,20 @@ public:
 
         return ans;
     }
+
+    // TODO dynamic programming, the most significant bit
+    vector<int> countBits3(int n) {
+        vector<int> ans(n + 1, 0);
+
+        return ans;
+    }
+
+    // TODO, dynamic programming, the lest setting bit
+    vector<int> countBits4(int n) {
+        vector<int> ans(n + 1, 0);
+
+        return ans;
+    }
 };
 
 int main() {
