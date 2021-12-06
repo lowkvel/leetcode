@@ -60,6 +60,20 @@ public:
         }
         return counts;
     }
+
+    // dynamic programming, the least significant bit
+    vector<int> countBits2(int n) {
+        vector<int> ans(n + 1, 0);
+        for (int i = 1; i <= n; i++) 
+            if (i % 2 == 1)                     // odd number i has one more 1 at tail compared to even number i-1
+                ans[i] = ans[i - 1] + 1;
+            else                                // even number i has same 1 counts compared to i/2 (tail 0 removed)
+                ans[i] = ans[i / 2];
+
+            //ans[i] = ans[i >> 1] + (i & 1);   // advanced version of above
+
+        return ans;
+    }
 };
 
 int main() {
