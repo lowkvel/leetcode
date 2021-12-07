@@ -79,7 +79,12 @@ public:
     // TODO dynamic programming, the most significant bit
     vector<int> countBits3(int n) {
         vector<int> ans(n + 1, 0);
-
+        int msb = 0;
+        for (int i = 1; i <= n; i++) {
+            if ((i & (i - 1)) == 0)         // the msb found, in the format with 10...0
+                msb = i;
+            ans[i] = ans[i - msb] + 1;      // i has one more 1 at head compared to i-msb 
+        }
         return ans;
     }
 
