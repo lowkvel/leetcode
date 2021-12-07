@@ -76,7 +76,7 @@ public:
         return ans;
     }
 
-    // TODO dynamic programming, the most significant bit
+    // dynamic programming, the most significant bit
     vector<int> countBits3(int n) {
         vector<int> ans(n + 1, 0);
         int msb = 0;
@@ -88,10 +88,11 @@ public:
         return ans;
     }
 
-    // TODO dynamic programming, the lest setting bit
+    // dynamic programming, the least setting bit
     vector<int> countBits4(int n) {
         vector<int> ans(n + 1, 0);
-
+        for (int i = 1; i <= n; i++)
+            ans[i] = ans[i & (i - 1)] + 1;  // i has one more 1 compared to i&(i-1) for the last 1, ex: i:1110, i&(i-1)=1110&1101=1100
         return ans;
     }
 };
