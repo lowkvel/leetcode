@@ -52,8 +52,26 @@ public:
         return ans;
     }
 
-    // TODO bit operation
+    // bit operation
+    /*
+        A  B  A^B  (A&B)<<1     +
+        0  0   0      00     00+0=00
+        0  1   1      00     00+1=01
+        1  0   1      00     00+1=01
+        1  1   0      10     10+0=10
+    */
     string addBinary2(string a, string b) {
+
+        /*
+            python version code:
+
+            x, y = int(a, 2), int(b, 2)
+            while y:
+                answer = x ^ y
+                carry = (x & y) << 1
+                x, y = answer, carry
+            return bin(x)[2:]
+        */
 
         return "";
     }
