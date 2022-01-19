@@ -57,21 +57,21 @@ public:
 
     // dual pointer
     void merge2(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        int p1 = 0;
-        int p2 = 0;
+        int p1 = 0;                     // pointer for nums1
+        int p2 = 0;                     // pointer for nums2
         int sorted[m + n];
-        int curr;
+        int cur;
         while (p1 < m || p2 < n) {
-            if (p1 == m)
-                curr = nums2[p2++];
-            else if (p2 == n)
-                curr = nums1[p1++];
-            else if (nums1[p1] < nums2[p2])
-                curr = nums1[p1++];
-            else
-                curr = nums2[p2++];
+            if (p1 == m)                // edge of nums1 reached, add nums2
+                cur = nums2[p2++];
+            else if (p2 == n)           // edge of nums2 reached, add nums1
+                cur = nums1[p1++];
+            else if (nums1[p1] < nums2[p2])     // nums1
+                cur = nums1[p1++];
+            else                                // nums2
+                cur = nums2[p2++];
             
-            sorted[p1 + p2 - 1] = curr;
+            sorted[p1 + p2 - 1] = cur;          // add
         }
 
         for (int i = 0; i != m + n; i++)
@@ -80,21 +80,21 @@ public:
 
     // reversed dual pointer
     void merge3(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        int p1 = m - 1;
-        int p2 = n - 1;
-        int tail = m + n - 1;
+        int p1 = m - 1;                 // pointer for nums1, backwards
+        int p2 = n - 1;                 // pointer for nums2, backwards
+        int tail = m + n - 1;           // tail pointer used for nums1
         int curr;
         while (p1 >= 0 || p2 >= 0) {
-            if (p1 == -1)
+            if (p1 == -1)               // edge reached
                 curr = nums2[p2--];
-            else if (p2 == -1)
+            else if (p2 == -1)          // edge reached
                 curr = nums1[p1--];
-            else if (nums1[p1] > nums2[p2])
+            else if (nums1[p1] > nums2[p2])     // nums1
                 curr = nums1[p1--];
-            else
+            else                                // nums2
                 curr = nums2[p2--];
 
-            nums1[tail--] = curr;
+            nums1[tail--] = curr;               // add
         }
     }
 };
