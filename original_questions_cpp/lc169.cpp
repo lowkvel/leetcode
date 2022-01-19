@@ -59,6 +59,12 @@ public:
         }
         return ans;
     }
+
+    // sort, then nums[n/2]
+    int majorityElement3(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size() / 2];
+    }
 };
 
 int main() {
