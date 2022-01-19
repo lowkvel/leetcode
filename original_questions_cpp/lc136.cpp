@@ -21,6 +21,8 @@
 
 # include <iostream>
 # include <vector>
+# include <unordered_map>
+# include <unordered_set>
 
 using namespace std;
 
@@ -33,10 +35,60 @@ public:
             ans = ans ^ nums[i];
         return ans;
     }
+
+    // map, insert key & increment count, output the key with count == 1
+    int singleNumber2(vector<int>& nums) {
+        unordered_map<int, int> umap;
+        for (int i = 0; i < nums.size(); i++) 
+            if (umap.count(nums[i]) == 0)
+                umap.insert(make_pair(nums[i], 1));
+            else 
+                umap[nums[i]]++;
+
+        for (unordered_map<int, int>::const_iterator it = umap.begin(); it != umap.end(); it++)
+            if ((*it).second == 1)
+                return (*it).first;
+
+        return 0;
+    }
+
+    // set, insert then delete duplicates, output the last element
+    int singleNumber3(vector<int>& nums) {
+        unordered_set<int> uset;
+        for (int i = 0; i < nums.size(); i++)
+            if (uset.count(nums[i]) == 0)
+                uset.insert(nums[i]);
+            else
+                uset.erase(nums[i]);
+
+        return *uset.begin();
+    }
 };
 
 int main() {
     cout << (2 ^ 1) << endl;
     cout << (2 ^ 2 ^ 2 ^ 2) << endl;
     cout << (2 ^ 3) << endl;
+
+    Solution *s = new Solution();
+
+    vector<int> v1;
+    v1.push_back(2);
+    v1.push_back(2);
+    v1.push_back(1);
+
+    cout << s->singleNumber(v1) << endl;
+    cout << s->singleNumber2(v1) << endl;
+    cout << s->singleNumber3(v1) << endl;
+
+    vector<int> v2;
+    v2.push_back(4);
+    v2.push_back(1);
+    v2.push_back(2);
+    v2.push_back(1);
+    v2.push_back(2);
+
+    cout << s->singleNumber(v2) << endl;
+    cout << s->singleNumber2(v2) << endl;
+    cout << s->singleNumber3(v2) << endl;
 }
