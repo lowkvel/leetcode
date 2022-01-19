@@ -65,6 +65,24 @@ public:
         sort(nums.begin(), nums.end());
         return nums[nums.size() / 2];
     }
+
+    // Boyer–Moore majority vote algorithm
+    int majorityElement4(vector<int>& nums) {
+        int ans = 0;
+        int cnt = 0;
+
+        for (int num: nums) {
+            if (cnt == 0)
+                ans = num;
+            
+            if (num == ans)
+                cnt++;
+            else 
+                cnt--;
+        }
+
+        return ans;
+    }
 };
 
 int main() {
@@ -77,6 +95,8 @@ int main() {
 
     cout << s->majorityElement(v1) << endl;
     cout << s->majorityElement2(v1) << endl;
+    cout << s->majorityElement3(v1) << endl;
+    cout << s->majorityElement4(v1) << endl;
 
     vector<int> v2;
     v2.push_back(2);
@@ -89,4 +109,6 @@ int main() {
 
     cout << s->majorityElement(v2) << endl;
     cout << s->majorityElement2(v2) << endl;
+    cout << s->majorityElement3(v2) << endl;
+    cout << s->majorityElement4(v2) << endl;
 }
