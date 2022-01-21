@@ -58,6 +58,15 @@ public:
 
         return dp[n - 1][0];
     }
+
+    // greedy
+    int maxProfit2(vector<int>& prices) {
+        int ans = 0;
+        int n = prices.size();
+        for (int i = 1; i < n; ++i)
+            ans += max(0, prices[i] - prices[i - 1]);
+        return ans;
+    }
 };
 
 int main() {
