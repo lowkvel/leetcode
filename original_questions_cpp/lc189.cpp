@@ -50,7 +50,23 @@ public:
 
     // ring-like substitution, math
     void rotate2(vector<int>& nums, int k) {
-        
+        int n = nums.size();
+        k = k % n;
+        int count = gcd(k, n);
+
+        for (int start = 0; start < count; ++start) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % n;
+                swap(nums[next], prev);
+                current = next;
+            } while (start != current);
+        }
+    }
+
+    int gcd(int a, int b) {
+        return b ? gcd(b, a % b) : a;
     }
 
     // triple rotate
