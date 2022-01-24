@@ -23,7 +23,7 @@
 
 # include <iostream>
 # include <vector>
-# include <set>
+# include <unordered_set>
 
 using namespace std;
 
@@ -31,11 +31,11 @@ class Solution {
 public:
     // using characteristic of set, non-duplicates
     bool containsDuplicate(vector<int> &nums) {
-        set<int> s;
-        for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++) {
-            if (s.find(*it) != s.end())
+        unordered_set<int> uset;
+        for (int i = 0; i < nums.size(); i++) {
+            if (uset.count(nums[i]) > 0)
                 return true;
-            s.insert(*it);
+            uset.insert(nums[i]);
         }
         return false;
     }
