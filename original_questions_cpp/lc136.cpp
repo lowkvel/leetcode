@@ -40,10 +40,7 @@ public:
     int singleNumber2(vector<int>& nums) {
         unordered_map<int, int> umap;
         for (int i = 0; i < nums.size(); i++) 
-            if (umap.count(nums[i]) == 0)
-                umap.insert(make_pair(nums[i], 1));
-            else 
-                umap[nums[i]]++;
+            umap[nums[i]]++;
 
         for (unordered_map<int, int>::const_iterator it = umap.begin(); it != umap.end(); it++)
             if ((*it).second == 1)
