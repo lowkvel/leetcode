@@ -30,9 +30,9 @@ public:
         unordered_map<int, int> umap;
 
         for (char c: s)
-            umap[c]++;
+            umap[c]++;                          // frequence++
 
-        for (int i = 0; i < s.size(); i++)
+        for (int i = 0; i < s.size(); i++)      // loop through original string
             if (umap[s[i]] == 1)
                 return i;
 
@@ -45,19 +45,19 @@ public:
 
         for (int i = 0; i < s.size(); i++)
             if (umap.count(s[i]) == 0)
-                umap[s[i]] = i;
+                umap[s[i]] = i;                             // index recorded
             else
-                umap[s[i]] = -1;
+                umap[s[i]] = -1;                            // index removed
 
-        int first = s.size();
+        int index = s.size();
         for (unordered_map<int, int>::iterator it = umap.begin(); it != umap.end(); it++) 
-            if (it->second != -1 && it->second < first)
-                first = it->second;
+            if (it->second != -1 && it->second < index)     // find smallest index
+                index = it->second;
         
-        if (first == s.size())
-            first = -1;
+        if (index == s.size())                              // all repeated elements
+            index = -1;
 
-        return first;
+        return index;
     }
 
     // queue
@@ -66,12 +66,12 @@ public:
         queue<pair<char, int> > q;
         
         for (int i = 0; i < s.size(); ++i) 
-            if (umap.count(s[i]) == 0) {
-                umap[s[i]] = i;
-                q.push(make_pair(s[i], i));
-            } else {
-                umap[s[i]] = -1;
-                while (!q.empty() && umap[q.front().first] == -1)
+            if (umap.count(s[i]) == 0) {                            // unseen char met
+                umap[s[i]] = i;                                     // char with index added into map
+                q.push(make_pair(s[i], i));                         // unseen <char, index> pushed into queue
+            } else {                                                // seen char met
+                umap[s[i]] = -1;                                    // char with index set to -1 in map
+                while (!q.empty() && umap[q.front().first] == -1)   // pop front elements with index -1 in map from queue (delayed deletion here)
                     q.pop();
             }
 
