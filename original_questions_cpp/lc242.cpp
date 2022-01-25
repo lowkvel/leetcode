@@ -40,22 +40,19 @@ public:
 
     // hash
     bool isAnagram2(string s, string t) {
-        if (s.length() != t.length())
+        if (s.length() != t.length())       // string length different, false
             return false;
 
         unordered_map<char, int> umap;
         for (char c: s)
-            if (umap.count(c) == 0)
-                umap[c] = 1;
-            else
-                umap[c]++;
+            umap[c]++;
 
         for (char c: t) 
-            if (umap.count(c) == 0)
+            if (umap.count(c) == 0)         // unseen char met, false
                 return false;
             else {
                 umap[c]--;
-                if (umap[c] < 0)
+                if (umap[c] < 0)            // char count different, false
                     return false;
             }
 
