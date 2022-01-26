@@ -52,9 +52,36 @@ public:
 
         return strs[0].substr(0, index); 
     }
+
+    // horizontal scan
+    string longestCommonPrefix2(vector<string>& strs) {
+        if (strs.size() <= 0)
+            return "";
+        if (strs.size() == 1)
+            return strs[0];
+
+        string ans = strs[0];
+        for (int i = 1; i < strs.size(); i++) {
+            ans = ans.substr(0, min(ans.length(), strs[i].length()));       // shortern the ans if needed
+            for (int j = 0; j < min(ans.length(), strs[i].length()); j++) 
+                if (ans[j] != strs[i][j]) {
+                    ans = ans.substr(0, j);
+                    break;
+                }
+            if (ans == "")                                                  // early quits
+                return ans;
+        }
+
+        return ans;
+    }
 };
 
 int main() {
     Solution *s = new Solution();
     
+    vector<string> v1;
+    v1.push_back("ab");
+    v1.push_back("a");
+
+    s->longestCommonPrefix2(v1);
 }
